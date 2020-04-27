@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,11 +8,14 @@ public class RaycastShoot : MonoBehaviour
 
     public int gunDamage = 1;
     // how often we cn shoot 
-    public float fireRate = .1f;
+    public float fireRate = 0f;
     public float weaponRange = 50f;
     // how much force will be applid to objects hit 
     public float hitForce = 100f;
     public Transform gunEnd;
+    public int maxAmmo = 10;
+    public float reloadTime = 1.5f;
+    public Animator animator;
 
 
     private Camera fpsCam;
@@ -20,7 +24,8 @@ public class RaycastShoot : MonoBehaviour
     private AudioSource gunAudio;
     private LineRenderer laserLine;
     private float nextFire;
-
+    private int currentAmmo;
+    private bool isReloading = false;
 
 
     void Start()
@@ -28,43 +33,76 @@ public class RaycastShoot : MonoBehaviour
         laserLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
         fpsCam = GetComponentInParent<Camera>();
+        currentAmmo = maxAmmo;
     }
 
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
+        if (isReloading) return;
+
+        if(currentAmmo <= 0f)
         {
-            nextFire = Time.time + fireRate;
+            StartCoroutine(Reload());
+            return;
+        }
 
-            StartCoroutine(ShotEffect());
+        if (Input.GetButton("Fire1") && Time.time > nextFire)
+        {
+            shoot();
+        }
+    }
 
-            Vector3 rayOrigin = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+    IEnumerator Reload()
+    {
+        isReloading = true;
 
-            RaycastHit hit;
+        Debug.Log("Reloading...");
 
-            laserLine.SetPosition(0, gunEnd.position);
+        animator.SetBool("Reloading", true);
 
-            if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, weaponRange))
+        yield return new WaitForSeconds(reloadTime);
+
+        animator.SetBool("Reloading", false);
+
+        currentAmmo = maxAmmo;
+
+        isReloading = false;
+    }
+
+    private void shoot()
+    {
+        currentAmmo--;
+
+        nextFire = Time.time + fireRate;
+
+        StartCoroutine(ShotEffect());
+
+        Vector3 rayOrigin = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+
+        RaycastHit hit;
+
+        laserLine.SetPosition(0, gunEnd.position);
+
+        if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, weaponRange))
+        {
+            laserLine.SetPosition(1, hit.point);
+
+            shootableTarget health = hit.collider.GetComponent<shootableTarget>();
+
+            if (health != null)
             {
-                laserLine.SetPosition(1, hit.point);
-
-                shootableTarget health = hit.collider.GetComponent<shootableTarget>();
-
-                if(health != null)
-                {
-                    health.Damage(gunDamage);
-                }
-
-                if(hit.rigidbody != null)
-                {
-                    hit.rigidbody.AddForce(-hit.normal * hitForce);
-                }
+                health.Damage(gunDamage);
             }
-            else
+
+            if (hit.rigidbody != null)
             {
-                laserLine.SetPosition(1, rayOrigin + (fpsCam.transform.forward * weaponRange));
+                hit.rigidbody.AddForce(-hit.normal * hitForce);
             }
+        }
+        else
+        {
+            laserLine.SetPosition(1, rayOrigin + (fpsCam.transform.forward * weaponRange));
         }
     }
 
