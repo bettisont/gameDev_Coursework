@@ -4051,7 +4051,7 @@ GameObject:
   - component: {fileID: 1427683481}
   - component: {fileID: 1427683480}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CrossHair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5382,6 +5382,10 @@ MonoBehaviour:
   weaponRange: 50
   hitForce: 100
   gunEnd: {fileID: 34178456}
+  maxAmmo: 10
+  reloadTime: 1.5
+  animator: {fileID: 0}
+  muzzleFlash: {fileID: 0}
 --- !u!120 &1884741978
 LineRenderer:
   m_ObjectHideFlags: 0

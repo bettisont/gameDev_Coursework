@@ -13,15 +13,17 @@ public class RaycastShoot : MonoBehaviour
     // how much force will be applid to objects hit 
     public float hitForce = 100f;
     public Transform gunEnd;
-    public int maxAmmo = 10;
-    public float reloadTime = 1.5f;
+    public int maxAmmo = 8;
+    public float reloadTime = 4f;
     public Animator animator;
+    public ParticleSystem muzzleFlash;
 
 
     private Camera fpsCam;
     // how long laser remains visible in gameView 
     private WaitForSeconds shotDuration = new WaitForSeconds(.07f);
-    private AudioSource gunAudio;
+    public AudioSource gunShot;
+    public AudioSource gunOutOfAmmo;
     private LineRenderer laserLine;
     private float nextFire;
     private int currentAmmo;
@@ -31,7 +33,6 @@ public class RaycastShoot : MonoBehaviour
     void Start()
     {
         laserLine = GetComponent<LineRenderer>();
-        gunAudio = GetComponent<AudioSource>();
         fpsCam = GetComponentInParent<Camera>();
         currentAmmo = maxAmmo;
     }
@@ -41,15 +42,27 @@ public class RaycastShoot : MonoBehaviour
     {
         if (isReloading) return;
 
-        if(currentAmmo <= 0f)
-        {
-            StartCoroutine(Reload());
-            return;
-        }
+       // if(currentAmmo <= 0f)
+        //{
+        //    gunOutOfAmmo.Play();
+        //    StartCoroutine(Reload());
+          //  return;
+        //}
 
         if (Input.GetButton("Fire1") && Time.time > nextFire)
         {
-            shoot();
+            currentAmmo--;
+            if (currentAmmo < 0)
+            {
+                gunOutOfAmmo.Play();
+                StartCoroutine(Reload());
+                return;
+            }
+            else
+            {
+                shoot();
+            }
+
         }
     }
 
@@ -72,11 +85,16 @@ public class RaycastShoot : MonoBehaviour
 
     private void shoot()
     {
-        currentAmmo--;
+
+
+
 
         nextFire = Time.time + fireRate;
 
-        StartCoroutine(ShotEffect());
+
+        muzzleFlash.Play();
+        gunShot.Play();
+    
 
         Vector3 rayOrigin = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
 
@@ -106,12 +124,4 @@ public class RaycastShoot : MonoBehaviour
         }
     }
 
-    private IEnumerator ShotEffect() {
-
-        gunAudio.Play();
-        laserLine.enabled = true;
-
-        yield return shotDuration;
-        laserLine.enabled = false;
-    }
 }
