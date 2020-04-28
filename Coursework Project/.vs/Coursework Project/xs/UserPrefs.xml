@@ -1,23 +1,24 @@
 ﻿<Properties StartupConfiguration="{9B1706C4-EA94-1364-F2BF-49DCA2505CBB}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_scripts/RaycastShoot.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/GameManager.cs">
     <Files>
       <File FileName="Assets/_scripts/TeleportController.cs" Line="15" Column="1" />
-      <File FileName="Assets/_scripts/RaycastShoot.cs" Line="50" Column="28" />
+      <File FileName="Assets/_scripts/RaycastShoot.cs" Line="112" Column="13" />
       <File FileName="Assets/RayViewer.cs" Line="25" Column="2" />
       <File FileName="Assets/shootableTarget.cs" Line="20" Column="1" />
-      <File FileName="Assets/MainMenu.cs" Line="12" Column="42" />
+      <File FileName="Assets/MainMenu.cs" Line="18" Column="6" />
       <File FileName="Library/PackageCache/com.unity.probuilder@3.10.1/ProBuilder/Shader/pb_StandardVertexColor.shader" Line="1" Column="1" />
+      <File FileName="Assets/scoreTimer.cs" Line="9" Column="16" />
+      <File FileName="Assets/timer.cs" Line="21" Column="6" />
+      <File FileName="Assets/minimapScript.cs" Line="14" Column="6" />
+      <File FileName="Assets/_scripts/Player.cs" Line="7" Column="5" />
+      <File FileName="Assets/_scripts/PlayerData.cs" Line="11" Column="1" />
+      <File FileName="Assets/EndTrigger.cs" Line="7" Column="23" />
+      <File FileName="Assets/GameManager.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Coursework Project" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="_scripts" expanded="True">
-                <Node name="RaycastShoot.cs" selected="True" />
-              </Node>
-            </Node>
-          </Node>
+          <Node name="Coursework Project" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>

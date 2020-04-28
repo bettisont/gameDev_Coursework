@@ -17,6 +17,7 @@ public class RaycastShoot : MonoBehaviour
     public float reloadTime = 4f;
     public Animator animator;
     public ParticleSystem muzzleFlash;
+    public GameObject impactEffect;
 
 
     private Camera fpsCam;
@@ -24,6 +25,7 @@ public class RaycastShoot : MonoBehaviour
     private WaitForSeconds shotDuration = new WaitForSeconds(.07f);
     public AudioSource gunShot;
     public AudioSource gunOutOfAmmo;
+    public AudioSource hitMarker;
     private LineRenderer laserLine;
     private float nextFire;
     private int currentAmmo;
@@ -106,10 +108,14 @@ public class RaycastShoot : MonoBehaviour
         {
             laserLine.SetPosition(1, hit.point);
 
+            GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impact, 2f);
+
             shootableTarget health = hit.collider.GetComponent<shootableTarget>();
 
             if (health != null)
             {
+                hitMarker.Play();
                 health.Damage(gunDamage);
             }
 
