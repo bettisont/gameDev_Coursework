@@ -1,19 +1,20 @@
 ﻿<Properties StartupConfiguration="{9B1706C4-EA94-1364-F2BF-49DCA2505CBB}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/GameManager.cs">
     <Files>
-      <File FileName="Assets/_scripts/TeleportController.cs" Line="15" Column="1" />
-      <File FileName="Assets/_scripts/RaycastShoot.cs" Line="112" Column="13" />
-      <File FileName="Assets/RayViewer.cs" Line="25" Column="2" />
-      <File FileName="Assets/shootableTarget.cs" Line="20" Column="1" />
-      <File FileName="Assets/MainMenu.cs" Line="18" Column="6" />
       <File FileName="Library/PackageCache/com.unity.probuilder@3.10.1/ProBuilder/Shader/pb_StandardVertexColor.shader" Line="1" Column="1" />
-      <File FileName="Assets/scoreTimer.cs" Line="9" Column="16" />
-      <File FileName="Assets/timer.cs" Line="21" Column="6" />
-      <File FileName="Assets/minimapScript.cs" Line="14" Column="6" />
-      <File FileName="Assets/_scripts/Player.cs" Line="7" Column="5" />
-      <File FileName="Assets/_scripts/PlayerData.cs" Line="11" Column="1" />
-      <File FileName="Assets/EndTrigger.cs" Line="7" Column="23" />
-      <File FileName="Assets/GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/_scripts/RaycastShoot.cs" Line="112" Column="13" />
+      <File FileName="Assets/RayViewer.cs" />
+      <File FileName="Assets/shootableTarget.cs" Line="19" Column="6" />
+      <File FileName="Assets/scoreTimer.cs" />
+      <File FileName="Assets/timer.cs" Line="20" Column="1" />
+      <File FileName="Assets/minimapScript.cs" Line="11" Column="1" />
+      <File FileName="Assets/_scripts/PlayerData.cs" />
+      <File FileName="Assets/EndTrigger.cs" Line="12" Column="28" />
+      <File FileName="Assets/GameManager.cs" Line="13" Column="1" />
+      <File FileName="Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs" Line="20" Column="54" />
+      <File FileName="Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/MouseLook.cs" Line="73" Column="38" />
+      <File FileName="Assets/Patrol.cs" Line="15" Column="21" />
+      <File FileName="Assets/targetsShotUIController.cs" Line="31" Column="34" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
